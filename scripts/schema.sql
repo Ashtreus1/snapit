@@ -38,4 +38,15 @@ create table comments (
     foreign key (user_id) references users(id) on delete cascade,
     foreign key (image_id) references users_images(id) on delete cascade
 );
+
+CREATE TABLE pinned_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    image_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY unique_pin (user_id, image_id),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (image_id) REFERENCES users_images(id) ON DELETE CASCADE
+);
+
     

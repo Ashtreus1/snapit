@@ -31,4 +31,15 @@ class UserModel {
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function updateProfile($id, $username, $avatarPath = null) {
+        if ($avatarPath) {
+            $stmt = $this->pdo->prepare("UPDATE users SET username = ?, avatar_path = ? WHERE id = ?");
+            return $stmt->execute([$username, $avatarPath, $id]);
+        } else {
+            $stmt = $this->pdo->prepare("UPDATE users SET username = ? WHERE id = ?");
+            return $stmt->execute([$username, $id]);
+        }
+    }
+
 }

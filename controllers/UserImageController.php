@@ -68,4 +68,28 @@ class UserImageController
 			exit;
 		}
 	}
+
+	public function handleTogglePin() {
+		requireAuth();
+		$userId = $_SESSION['user_id'];
+		$imageId = $_POST['image_id'];
+
+		if ($this->userImageModel->hasUserPinned($userId, $imageId)) {
+			$this->userImageModel->unpinImage($userId, $imageId);
+		} else {
+			$this->userImageModel->pinImage($userId, $imageId);
+		}
+
+		header("Location: " . basePath('/feed'));
+		exit;
+	}
+
+	public function handleFetchPinnedImages($userId) {
+		return $this->userImageModel->fetchPinnedImagesByUser($userId);
+	}
+
+	public function handleFetchPinnedImagesByUser($userId) {
+		return $this->userImageModel->fetchPinnedImagesByUserId($userId);
+	}
+
 }

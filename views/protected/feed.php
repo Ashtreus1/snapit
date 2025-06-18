@@ -59,6 +59,10 @@
 <div class="m-10 p-6 grid grid-cols-2 md:grid-cols-4 gap-6">
   <?php if (!empty($images)): ?>
     <?php foreach ($images as $image): ?>
+      <?php
+        $isPinned = in_array($image['id'], array_column($user['pinned_images'], 'image_id'));
+      ?>
+
       <div class="relative group overflow-hidden rounded-lg mb-6">
         <a href="<?= basePath('/comments?image_id=' . $image['id']) ?>">
           <img 
@@ -68,26 +72,34 @@
           >
           <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </a>
-        <button 
-          class="absolute top-2 right-2 z-10 p-2 rounded-full shadow-md opacity-0 
-                group-hover:opacity-100 bg-white text-red-500 
-                hover:bg-red-500 hover:text-white transition-all duration-300 
-                group/button">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="currentColor" 
-            class="w-5 h-5 transition-colors duration-300">
-            <path fill-rule="evenodd" 
-                  d="M12.1 21.55l-1.1-1.02C5.14 15.24 2 12.39 2 8.5 
-                    2 6 4 4 6.5 4c1.74 0 3.41 1 4.13 2.44h1.74C14.09 5 
-                    15.76 4 17.5 4 20 4 22 6 22 8.5c0 3.89-3.14 6.74-8.9 
-                    12.03l-1.1 1.02z" 
-                  clip-rule="evenodd" />
-          </svg>
-        </button>
+
+        <form 
+          action="<?= basePath('/toggle-pin') ?>" 
+          method="POST" 
+          class="absolute top-2 right-2 z-10 transition-opacity duration-300
+                <?= $isPinned ? '' : 'opacity-0 group-hover:opacity-100' ?>">
+          
+          <input type="hidden" name="image_id" value="<?= $image['id'] ?>">
+
+          <button
+            type="submit"
+            class="p-2 rounded-full shadow-md 
+                  bg-white text-red-500 hover:bg-red-500 hover:text-white 
+                  transition-all duration-300 <?= $isPinned ? 'bg-red-500 text-red' : '' ?>"
+            title="<?= $isPinned ? 'Unpin' : 'Pin this post' ?>">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+              fill="currentColor" class="w-5 h-5 transition-colors duration-300">
+              <path fill-rule="evenodd" d="M12.1 21.55l-1.1-1.02C5.14 15.24 2 12.39 2 8.5 
+                2 6 4 4 6.5 4c1.74 0 3.41 1 4.13 2.44h1.74C14.09 5 
+                15.76 4 17.5 4 20 4 22 6 22 8.5c0 3.89-3.14 6.74-8.9 
+                12.03l-1.1 1.02z"
+                clip-rule="evenodd" />
+            </svg>
+          </button>
+        </form>
       </div>
     <?php endforeach; ?>
+
   <?php else: ?>
     <p class="text-center col-span-full text-gray-600">No images found.</p>
   <?php endif; ?>

@@ -54,6 +54,9 @@ $router->get('/feed', function () use ($render, $tagController, $userImageContro
     $images = $userImageController->handleFetchImages($selectedTag);
     $currentUser = $userController->getCurrentUser();
 
+    $pinnedImages = $userImageController->handleFetchPinnedImagesByUser($currentUser['id']);
+	$currentUser['pinned_images'] = $pinnedImages;
+
     $render->setLayout('layouts/protected');
     $render->view('protected/feed', [
         'title' => 'Feed',
@@ -63,6 +66,9 @@ $router->get('/feed', function () use ($render, $tagController, $userImageContro
         'user' => $currentUser
     ]);
 });
+
+$router->post('/toggle-pin', fn () => (new UserImageController())->handleTogglePin());
+
 
 // Create Post
 $router->get('/creation-post', function () use ($render, $tagController) {
@@ -84,13 +90,19 @@ $router->get('/profile', function () use ($render, $userController, $userImageCo
     $currentUser = $userController->getCurrentUser();
     $images = $userImageController->handleFetchImagesByUserId($_SESSION['user_id']);
 
+    $pinnedImages = $userImageController->handleFetchPinnedImages($_SESSION['user_id']);
+
     $render->setLayout('layouts/protected');
     $render->view('protected/profile', [
         'title' => 'Profile',
         'user' => $currentUser,
-        'images' => $images
+        'images' => $images,
+        'pinnedImages' => $pinnedImages
     ]);
 });
+
+$router->post('/profile/update', fn () => (new UserController())->handleUpdate());
+
 
 // Comments Page
 $router->get('/comments', function () use ($render, $userController, $userImageController, $commentController) {
