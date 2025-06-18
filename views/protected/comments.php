@@ -29,14 +29,17 @@
         </div>
 
         <div class="comment-input-box">
-          <form action="<?= basePath('/comments?image_id=' . urlencode($imageDetails['id'])) ?>" method="POST">
+          <form action="<?= basePath('/comments?image_id=' . urlencode($imageDetails['id'])) ?>" method="POST" class="relative">
             <input
               type="text"
               name="comment"
               placeholder="Comment here as <?= htmlspecialchars($userData['username']) ?>"
               required
+              class="pr-12"
             />
-            <button type="submit">Post</button>
+            <button type="submit" class="send-btn">
+              <span class="material-symbols-outlined">send</span>
+            </button>
           </form>
         </div>
       </div>
