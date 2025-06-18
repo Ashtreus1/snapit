@@ -14,4 +14,9 @@ class TagModel {
 		$query->execute();
 		return $query->fetchAll(PDO::FETCH_COLUMN); 
 	}
+
+	public function fetchAllTags(){
+		$stmt = $this->pdo->query("SELECT id, name FROM tags ORDER BY name ASC");
+		return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+	}
 }

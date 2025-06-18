@@ -38,4 +38,8 @@ class UserImageModel
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public function createImage($userId, $title, $description, $imagePath, $tagId){
+		$stmt = $this->pdo->prepare('insert into users_images (user_id, title, description, image_path, tag_id) values (?, ?, ?, ?, ?)');
+		return $stmt->execute([$userId, $title, $description, $imagePath, $tagId]);
+	}
 }

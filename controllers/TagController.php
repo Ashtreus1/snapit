@@ -15,4 +15,8 @@ class TagController {
 	public function handleFetchTags(){
 		return $this->tagModel->fetchTags();
 	}
+
+	public function handleFetchAssociativeTags(){
+		return $this->tagModel->fetchAllTags();
+	}
 }

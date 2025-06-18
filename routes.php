@@ -64,28 +64,28 @@ $router->get('/feed', function () use ($render, $tagController, $userImageContro
     ]);
 });
 
-// // Create Post
-// $router->get('/creation-post', function () use ($render, $tagController) {
-//     requireAuth();
+// Create Post
+$router->get('/creation-post', function () use ($render, $tagController) {
+    requireAuth();
 
-//     $tags = $tagController->handleFetchTags();
-//     $render->setLayout('layouts/protected');
-//     $render->view('protected/creation_post', [
-//         'title' => 'Create Post',
-//         'tags' => $tags
-//     ]);
-// });
-// $router->post('/creation-post', fn () => (new UserImageController())->handlePost());
+    $tags = $tagController->handleFetchAssociativeTags();
+    $render->setLayout('layouts/protected');
+    $render->view('protected/creation_post', [
+        'title' => 'Create Post',
+        'tags' => $tags
+    ]);
+});
+$router->post('/creation-post', fn () => (new UserImageController())->handlePost());
 
-// // Profile
-// $router->get('/profile', function () use ($render) {
-//     requireAuth();
+// Profile
+$router->get('/profile', function () use ($render) {
+    requireAuth();
 
-//     $render->setLayout('layouts/protected');
-//     $render->view('protected/profile', [
-//         'title' => 'Profile'
-//     ]);
-// });
+    $render->setLayout('layouts/protected');
+    $render->view('protected/profile', [
+        'title' => 'Profile'
+    ]);
+});
 
 // Comments Page
 $router->get('/comments', function () use ($render, $userController, $userImageController, $commentController) {
