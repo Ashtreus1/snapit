@@ -67,8 +67,35 @@ $router->get('/feed', function () use ($render, $tagController, $userImageContro
     ]);
 });
 
-$router->post('/toggle-pin', fn () => (new UserImageController())->handleTogglePin());
+$router->get('/search', function () use ($render, $userImageController, $tagController, $userController) {
+    requireAuth();
 
+    $query = $_GET['q'] ?? '';
+    $images = [];
+
+    if (!empty($query)) {
+        $images = $userImageController->handleSearchByTitle($query);
+    }
+
+    $tags = $tagController->handleFetchTags();
+    $currentUser = $userController->getCurrentUser();
+
+    $pinnedImages = $userImageController->handleFetchPinnedImagesByUser($currentUser['id']);
+    $currentUser['pinned_images'] = $pinnedImages;
+
+    $render->setLayout('layouts/protected');
+    $render->view('protected/feed', [
+        'title' => 'Search Results',
+        'tags' => $tags,
+        'images' => $images,
+        'selectedTag' => null,
+        'user' => $currentUser,
+        'query' => $query
+    ]);
+});
+
+
+$router->post('/toggle-pin', fn () => (new UserImageController())->handleTogglePin());
 
 // Create Post
 $router->get('/creation-post', function () use ($render, $tagController) {

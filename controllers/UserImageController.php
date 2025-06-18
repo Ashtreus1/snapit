@@ -92,4 +92,9 @@ class UserImageController
 		return $this->userImageModel->fetchPinnedImagesByUserId($userId);
 	}
 
+	public function handleSearchByTitle($title)
+	{
+	    return $this->userImageModel->searchImagesByTitle($title);
+	}
+
 }

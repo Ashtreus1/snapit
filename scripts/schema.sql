@@ -36,7 +36,7 @@ create table comments (
     message text,
     created_at timestamp default CURRENT_TIMESTAMP,
     foreign key (user_id) references users(id) on delete cascade,
-    foreign key (image_id) references users_images(id) on delete cascade
+    foreign key (image_id) references users_images(id)
 );
 
 CREATE TABLE pinned_images (

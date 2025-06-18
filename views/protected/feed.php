@@ -8,15 +8,24 @@
         New Post
       </button>
     </a>
-  <label class="input rounded-full bg-transparent border border-gray-200">
-    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.3-4.3"></path>
-      </g>
-    </svg>
-    <input type="search" class="bg-transparent focus:outline-none" placeholder="Search" />
-  </label>
+  <form action="<?= basePath('/search') ?>" method="GET">
+    <label class="input rounded-full bg-transparent border border-gray-200">
+      <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </g>
+      </svg>
+      <input
+        type="search"
+        class="bg-transparent focus:outline-none"
+        placeholder="Search"
+        name="q"
+        value="<?= htmlspecialchars($query ?? '') ?>"
+      />
+    </label>
+  </form>
+
 
   <div class="flex flex-wrap items-center gap-2">
     <a href="<?= basePath('/feed') ?>"><button class="px-4 py-1 rounded-full transition-colors duration-300 <?= empty($selectedTag) || $selectedTag === 'All' ? 'bg-blue-600 text-white' : 'bg-transparent hover:bg-gray-200 text-black' ?>">

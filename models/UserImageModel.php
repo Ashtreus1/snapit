@@ -95,4 +95,18 @@ class UserImageModel
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	public function searchImagesByTitle($title)
+	{
+	    $stmt = $this->pdo->prepare("
+	        SELECT users_images.*, users.username 
+	        FROM users_images 
+	        JOIN users ON users.id = users_images.user_id 
+	        WHERE users_images.title LIKE ?
+	        ORDER BY users_images.created_at DESC
+	    ");
+	    $searchTerm = '%' . $title . '%';
+	    $stmt->execute([$searchTerm]);
+	    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
 }
