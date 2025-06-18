@@ -38,6 +38,19 @@ class UserImageModel
 		return $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
+	public function fetchImagesByUserId($userId) {
+		$stmt = $this->pdo->prepare("
+			SELECT users_images.*, users.username 
+			FROM users_images 
+			JOIN users ON users.id = users_images.user_id 
+			WHERE users_images.user_id = ?
+			ORDER BY users_images.created_at DESC
+		");
+		$stmt->execute([$userId]);
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+
 	public function createImage($userId, $title, $description, $imagePath, $tagId){
 		$stmt = $this->pdo->prepare('insert into users_images (user_id, title, description, image_path, tag_id) values (?, ?, ?, ?, ?)');
 		return $stmt->execute([$userId, $title, $description, $imagePath, $tagId]);

@@ -22,6 +22,11 @@ class UserImageController
 		return $this->userImageModel->fetchImageById($imageId);
 	}
 
+	public function handleFetchImagesByUserId($userId) {
+		return $this->userImageModel->fetchImagesByUserId($userId);
+	}
+
+
 	public function handlePost(){
 		requireAuth();
 

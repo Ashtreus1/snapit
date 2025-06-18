@@ -78,12 +78,17 @@ $router->get('/creation-post', function () use ($render, $tagController) {
 $router->post('/creation-post', fn () => (new UserImageController())->handlePost());
 
 // Profile
-$router->get('/profile', function () use ($render) {
+$router->get('/profile', function () use ($render, $userController, $userImageController) {
     requireAuth();
+
+    $currentUser = $userController->getCurrentUser();
+    $images = $userImageController->handleFetchImagesByUserId($_SESSION['user_id']);
 
     $render->setLayout('layouts/protected');
     $render->view('protected/profile', [
-        'title' => 'Profile'
+        'title' => 'Profile',
+        'user' => $currentUser,
+        'images' => $images
     ]);
 });
 

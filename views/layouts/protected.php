@@ -19,7 +19,7 @@
   <div class="navbar flex justify-between items-center bg-transparent shadow-sm px-6 py-4">
     <div class="flex items-center gap-3">
       <img src="assets/images/header-logo.png" class="h-10 w-10" alt="Logo" />
-      <p class="font-semibold text-xl cursor-pointer">Snappit</p>
+      <a href="<?= basePath('/feed') ?>" class="font-semibold text-xl cursor-pointer">Snappit</a>
     </div>
 
     <div class="flex gap-3 items-center">
