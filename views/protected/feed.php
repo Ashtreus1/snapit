@@ -60,7 +60,7 @@
   <?php if (!empty($images)): ?>
     <?php foreach ($images as $image): ?>
       <div class="relative group overflow-hidden rounded-lg mb-6">
-        <a href="<?= basePath('/view-page?id=' . $image['id']) ?>">
+        <a href="<?= basePath('/comments?image_id=' . $image['id']) ?>">
           <img 
             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             src="<?= htmlspecialchars($image['image_path']) ?>"

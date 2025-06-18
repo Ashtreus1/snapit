@@ -31,4 +31,11 @@ class UserImageModel
 
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
+
+	public function fetchImageById($id) {
+		$stmt = $this->pdo->prepare("SELECT users_images.*, users.username FROM users_images JOIN users ON users_images.user_id = users.id WHERE users_images.id = ?");
+		$stmt->execute([$id]);
+		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
 }

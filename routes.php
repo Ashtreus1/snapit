@@ -4,12 +4,12 @@ session_start();
 require_once BASE_PATH . '/controllers/UserController.php';
 require_once BASE_PATH . '/controllers/TagController.php';
 require_once BASE_PATH . '/controllers/UserImageController.php';
-// require_once BASE_PATH . '/controllers/CommentController.php';
+require_once BASE_PATH . '/controllers/CommentController.php';
 require_once BASE_PATH . '/core/Auth.php';
 
 $userController = new UserController();
 $userImageController = new UserImageController();
-// $comment = new CommentController();
+$commentController = new CommentController();
 $tagController = new TagController();
 
 $render = $GLOBALS['render'];
@@ -87,13 +87,28 @@ $router->get('/feed', function () use ($render, $tagController, $userImageContro
 //     ]);
 // });
 
-// // View Page
-// $router->get('/comments', function () use ($render) {
-//     requireAuth();
+// Comments Page
+$router->get('/comments', function () use ($render, $userController, $userImageController, $commentController) {
+    requireAuth();
 
-//     $render->setLayout('layouts/protected');
-//     $render->view('protected/comments', [
-//         'title' => 'View Image'
-//     ]);
-// });
-// $router->post('/comments', fn () => (new CommentController())->handleCreateComment());
+    $imageId = $_GET['image_id'] ?? null;
+
+    if(!isset($_GET['image_id'])){
+        header('Location: ' . basePath('/feed'));
+        exit;
+    }
+
+    $comments = $commentController->handleFetchCommentByImageId($imageId);
+    $imageDetails = $userImageController->handleFetchImageById($imageId);
+    $userData = $userController->getCurrentUser();
+
+    $render->setLayout('layouts/view');
+    $render->view('protected/comments', [
+        'title' => 'View Image',
+        'imagePath' => $imageDetails['image_path'],
+        'imageDetails' => $imageDetails,
+        'comments' => $comments,
+        'userData' => $userData
+    ]);
+});
+$router->post('/comments', fn () => (new CommentController())->handleCreateComment());

@@ -17,4 +17,8 @@ class UserImageController
 	{
 		return $this->userImageModel->fetchAllImages($tag);
 	}
+
+	public function handleFetchImageById($imageId){
+		return $this->userImageModel->fetchImageById($imageId);
+	}
 }

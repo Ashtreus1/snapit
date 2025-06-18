@@ -2,10 +2,8 @@
   <main class="main">
     <section class="post-section">
 
-      <!-- Display Main Image -->
       <img src="<?= htmlspecialchars($imagePath) ?>" alt="Post Image" class="main-image" />
 
-      <!-- Post Info -->
       <div class="post-content">
         <h2 class="main-caption">
           <?= htmlspecialchars($imageDetails['title'] ?? pathinfo(basename($imagePath), PATHINFO_FILENAME)) ?>
@@ -17,7 +15,6 @@
           <?= htmlspecialchars($imageDetails['description'] ?? '#Photography') ?>
         </div>
 
-        <!-- Comments Section -->
         <div class="comment-scroll">
           <?php if (!empty($comments)): ?>
             <?php foreach ($comments as $comment): ?>
@@ -31,9 +28,8 @@
           <?php endif; ?>
         </div>
 
-        <!-- Comment Form -->
         <div class="comment-input-box">
-          <form action="<?= basePath('/view-page') ?>" method="POST">
+          <form action="<?= basePath('/comments?image_id=' . urlencode($imageDetails['id'])) ?>" method="POST">
             <input
               type="text"
               name="comment"
@@ -44,7 +40,6 @@
           </form>
         </div>
       </div>
-
     </section>
   </main>
 </section>
