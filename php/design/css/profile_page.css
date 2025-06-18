@@ -1,0 +1,386 @@
+* {
+  margin: 0;
+  padding: 2;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 40px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.header .left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header .right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+
+.link-button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.new-post-btn {
+  margin-left: 3%;
+  gap: 16px;
+  display: flex;
+  height: 40px;
+  width: 130px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem; 
+  background-color: #49A4F9;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.notifications-icon {
+  font-size: 24px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.material-symbols-outlined{
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+  vertical-align: middle;
+}
+
+.username {
+  font-size: 16px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.header .user-pfp{
+  margin-left: 1%;
+  height: 50px;
+  width: 60px;
+  border-radius: 150px;
+}
+
+.cover-photo-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    height: 300px;
+}
+
+.cover-photo {
+    width: 100%;
+    filter: blur(6px);
+    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
+    height: 600px;
+    position: relative;
+    top: -150px;
+}
+
+.profile-content {
+    position: relative;
+    padding: 20px 69px;
+}
+
+
+
+.profile-picture-wrapper {
+    position: absolute;
+    top: -50px;
+    height: 200px;
+    width: 200px;
+    left: 8%;
+}
+
+.profile-outline {
+    width: 100%;
+    height: 100%;
+    border-radius: 126px;
+    outline: 30px rgba(255, 255, 255, 0.31) solid;
+    backdrop-filter: blur(24.75px);
+    position: absolute;
+    z-index: 1;    
+}
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+    border-radius: 126px;
+    z-index: 2;
+    position: relative;
+}
+
+.profile-actions {
+  margin-left: auto;
+}
+
+.profile-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* optional */
+  gap: 1rem; /* optional spacing */
+}
+
+
+.profile-details h1 {
+    font-size: 2.6em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.profile-details p {
+    font-size: 1em;
+    font-weight: 200;
+    margin: 5px 0;
+}
+
+.edit-profile-button {
+    display: flex;
+    align-items: center;
+    background: #49A4F9;
+    border-radius: 10px;
+    width: 200px;
+    height: 60px;
+    margin-top: 20px;
+    margin-left: 50%;
+    padding-left: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+
+.edit-icon span {
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 1px;
+}
+
+.edit-text {
+    font-size: 1em;
+    font-weight: 600;
+    text-align: center;
+}
+
+.profile-nav {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+    font-size: 32px;
+    font-weight: 600;
+    color: black;
+}
+
+.divider {
+    border: none;
+    border-top: 3px solid black;
+    margin: 20px 0;
+}
+
+.posts {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.post {
+    width: 457px;
+    position: relative;
+}
+
+.post img {
+    width: 100%;
+    height: 370px;
+    border-radius: 35px;
+}
+
+.caption-details{
+    display: flex;
+}
+
+.caption {
+    font-size: 29px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.tags {
+    font-size: 16px;
+    font-weight: 600;
+    color: #555;
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-left: 5%;
+    border: solid 2px black;
+    border-radius: 100px;
+    width: 110px;
+    height: 50px;
+}
+
+.like-icon {
+    width: 22px;
+    height: 23px;
+    border-radius: 4px;
+}
+
+/* Mobile-first adjustments */
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 15px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .title {
+        font-size: 28px;
+        margin-left: 0;
+    }
+
+    .new-post-button {
+        margin-left: 0;
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    .user-info {
+        margin-left: 0;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cover-photo-container {
+        height: 200px;
+    }
+
+    .cover-photo {
+        height: 300px;
+        top: -50px;
+    }
+
+    .profile-picture-wrapper {
+        position: relative;
+        top: -100px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .profile-outline,
+    .profile-picture {
+        width: 200px;
+        height: 210px;
+        border-radius: 100px;
+    }
+
+    .profile-details {
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .profile-details h1 {
+        font-size: 36px;
+    }
+
+    .profile-details p {
+        font-size: 20px;
+    }
+
+    .edit-profile-button {
+        margin-left: 0;
+        margin-top: 15px;
+        width: 200px;
+        height: 50px;
+    }
+
+    .edit-text {
+        font-size: 20px;
+    }
+
+    .profile-nav {
+        justify-content: center;
+        gap: 30px;
+        font-size: 20px;
+        flex-wrap: wrap;
+    }
+
+    .posts {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .post {
+        width: 90%;
+    }
+
+    .post img {
+        height: auto;
+    }
+
+    .caption {
+        font-size: 22px;
+    }
+
+    .tags {
+        font-size: 14px;
+    }
+
+    .likes {
+        width: auto;
+        padding: 0 15px;
+    }
+}

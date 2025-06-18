@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Profile Modal Prototype</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    /* Overlay background */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      padding: 16px;
+    }
+
+    .modal {
+      background-color: #fff;
+      border-radius: 16px;
+      max-width: 720px;
+      width: 100%;
+      padding: 32px 40px 40px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      position: relative;
+    }
+
+    /* Modal header */
+    .modal-header {
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-align: center;
+      position: relative;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+      color: #333;
+      transition: color 0.3s ease;
+      padding: 4px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: #007bff;
+      outline: none;
+      background-color: rgba(0,123,255,0.1);
+    }
+
+    /* Main modal content */
+    .modal-content {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .profile-img-container {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      min-width: 140px;
+    }
+
+    .profile-img {
+      width: 140px;
+      height: 140px;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      object-fit: cover;
+      background-color: #99303f;
+      box-shadow: inset -16px -16px 0 rgba(0,0,0,0.1);
+    }
+
+    .change-profile-btn {
+      padding: 8px 20px;
+      border-radius: 8px;
+      background-color: #60a5fa;
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .change-profile-btn:hover,
+    .change-profile-btn:focus {
+      background-color: #3b82f6;
+      outline: none;
+    }
+
+    /* Form fields container */
+    .form-fields {
+      flex-grow: 1;
+      min-width: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 6px;
+      color: #202020;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background-color: #fff;
+      padding: 8px 40px 8px 12px;
+      font-size: 1rem;
+      color: #222;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      border: none;
+      font-family: inherit;
+      font-size: 1rem;
+      color: #222;
+      resize: vertical;
+      background: transparent;
+      outline-offset: 2px;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      outline: 2px solid #60a5fa;
+    }
+
+    textarea {
+      min-height: 72px;
+      max-height: 120px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    /* Edit icon */
+    .material-icons.edit-icon {
+      position: absolute;
+      right: 12px;
+      cursor: pointer;
+      color: #555;
+      font-size: 20px;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+
+    .material-icons.edit-icon:hover,
+    .material-icons.edit-icon:focus {
+      color: #60a5fa;
+      outline: none;
+    }
+
+    /* Background selection section */
+    .background-selector {
+      width: 100%;
+      margin-top: 16px;
+      border-top: 1px solid #ddd;
+      padding-top: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .bg-options {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+      user-select: none;
+      max-height: 160px;
+    }
+
+    .bg-option {
+      position: relative;
+      cursor: pointer;
+      aspect-ratio: 8 / 9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .bg-option:hover,
+    .bg-option:focus {
+      outline: none;
+      border-color: #60a5fa;
+      transform: scale(1.05);
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(96,165,250,0.5);
+    }
+
+    .bg-option img {
+      width: 80%;
+      height: 80%;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      background: white;
+    }
+
+    /* Colored border segments for backgrounds */
+    .bg-option:nth-child(1) {
+      border-top: 24px solid #ea7e3c;
+      border-bottom: 24px solid #726da6;
+      background-color: #ebe8d8;
+    }
+    .bg-option:nth-child(2) {
+      border-top: 24px solid #4e8b55;
+      border-bottom: 24px solid #f2d04a;
+      background-color: #53b5e5;
+    }
+    .bg-option:nth-child(3) {
+      border-top: 24px solid #f2d04a;
+      border-bottom: 24px solid #ea7e3c;
+      background-color: #4a88ff;
+    }
+
+    /* Change background photo button */
+    .change-bg-btn {
+      margin-top: 12px;
+      padding: 10px 28px;
+      border-radius: 8px;
+      background-color: #60a5fa;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .change-bg-btn:hover,
+    .change-bg-btn:focus {
+      background-color: #3b82f6;
+      outline: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width:767px) {
+      /* Use single column */
+      .modal-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .form-fields {
+        width: 100%;
+      }
+
+      .bg-options {
+        grid-template-columns: repeat(3, 1fr);
+        max-height: none;
+      }
+    }
+
+    @media (min-width: 1440px) {
+      .modal {
+        max-width: 960px;
+        padding: 48px 56px 56px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <header class="modal-header" id="modalTitle">
+        Edit profile
+        <button
+          class="close-btn"
+          aria-label="Close edit profile modal"
+          title="Close"
+          type="button"
+        >
+          <span class="material-icons">close</span>
+        </button>
+      </header>
+
+      <section class="modal-content">
+        <div class="profile-img-container">
+          <img
+            src="https://placehold.co/140x140/red/ffffff?text=User+Avatar+Luffy+Hat"
+            alt="Profile picture avatar of a person with a red background and straw hat"
+            class="profile-img"
+            loading="lazy"
+            width="140"
+            height="140"
+          />
+          <button type="button" class="change-profile-btn">Change profile</button>
+        </div>
+
+        <form class="form-fields" novalidate>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <input
+                id="username"
+                name="username"
+                type="text"
+                value="Lhanz Hubilla"
+                aria-describedby="usernameHint"
+              />
+              <span class="material-icons edit-icon" tabindex="0" role="button" aria-label="Edit username">edit</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-wrapper">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value="lhanz.hubilla@gmail.com"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <div class="input-wrapper" style="padding-right: 40px;">
+              <textarea
+                id="bio"
+                name="bio"
+                rows="3"
+                aria-label="Bio"
+              >Currently studying BSIT
+Living in Cavite</textarea>
+              <span class="material-icons edit-icon" tabindex="0" role="button" aria-label="Edit bio">edit</span>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="background-selector" aria-label="Background photo selection">
+        <div class="bg-options" role="list">
+          <button type="button" class="bg-option" role="listitem" aria-label="Background option 1">
+            <img 
+              src="https://placehold.co/80x80/ebe8d8/ea7e3c?text=Pixel+Character+1" 
+              alt="Pixel art character with orange hair on beige background"
+              width="64" height="72" loading="lazy"
+            />
+          </button>
+          <button type="button" class="bg-option" role="listitem" aria-label="Background option 2">
+            <img 
+              src="https://placehold.co/80x80/53b5e5/4e8b55?text=Pixel+Character+2" 
+              alt="Pixel art character with cap and black hair on blue background" 
+              width="64" height="72" loading="lazy"
+            />
+          </button>
+          <button type="button" class="bg-option" role="listitem" aria-label="Background option 3">
+            <img 
+              src="https://placehold.co/80x80/4a88ff/f2d04a?text=Pixel+Character+3" 
+              alt="Pixel art character with dark hair on blue background" 
+              width="64" height="72" loading="lazy"
+            />
+          </button>
+        </div>
+        <button type="button" class="change-bg-btn">Change background photo</button>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
+

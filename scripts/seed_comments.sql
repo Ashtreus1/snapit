@@ -1,0 +1,22 @@
+INSERT INTO comments (user_id, image_id, message)
+VALUES 
+(1, 1, 'Awesome!'),
+(2, 2, 'Looks great'),
+(3, 3, 'Amazing photo'),
+(4, 4, 'Love this shot'),
+(5, 5, 'Nice colors'),
+(6, 6, 'Very cool'),
+(7, 7, 'Wonderful composition'),
+(8, 8, 'Beautiful!'),
+(9, 9, 'Really nice'),
+(10, 10, 'This is stunning'),
+(11, 11, 'Great work'),
+(12, 12, 'Superb!'),
+(13, 13, 'Love the vibe'),
+(14, 14, 'Epic shot'),
+(15, 15, 'What a view!'),
+(16, 16, 'Picture perfect'),
+(17, 17, 'Excellent framing'),
+(18, 18, 'Bravo!'),
+(19, 19, 'Stunning details'),
+(20, 20, 'Such clarity!');

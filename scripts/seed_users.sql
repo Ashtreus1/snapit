@@ -1,0 +1,22 @@
+INSERT INTO users (email, username, password, avatar_path)
+VALUES 
+('user1@example.com', 'user1', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user2@example.com', 'user2', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user3@example.com', 'user3', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user4@example.com', 'user4', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user5@example.com', 'user5', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user6@example.com', 'user6', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user7@example.com', 'user7', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user8@example.com', 'user8', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user9@example.com', 'user9', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user10@example.com', 'user10', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user11@example.com', 'user11', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user12@example.com', 'user12', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user13@example.com', 'user13', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user14@example.com', 'user14', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user15@example.com', 'user15', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user16@example.com', 'user16', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user17@example.com', 'user17', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user18@example.com', 'user18', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user19@example.com', 'user19', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png'),
+('user20@example.com', 'user20', '$2y$10$bOfcsvH4PYfXKdm7U130m.9mCe/62YKHn4YW8BpuLQOpt8xO0dYfa', 'assets/images/user/avatar1.png');
