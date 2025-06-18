@@ -19,8 +19,8 @@
   </label>
 
   <div class="flex flex-wrap items-center gap-2">
-    <a href="<?= basePath('/feed') ?>">
-      <button class="px-4 py-1 bg-transparent rounded-full hover:bg-blue-600 cursor-pointer transition-colors duration-300<?= empty($selectedTag) || $selectedTag === 'All' ? ' bg-blue-600 text-white' : '' ?>">
+    <a href="<?= basePath('/feed') ?>"><button class="px-4 py-1 rounded-full transition-colors duration-300 <?= empty($selectedTag) || $selectedTag === 'All' ? 'bg-blue-600 text-white' : 'bg-transparent hover:bg-gray-200 text-black' ?>">
+      
         All
       </button>
     </a>
@@ -30,7 +30,7 @@
       $isActive = isset($selectedTag) && $selectedTag === $tag;
       ?>
       <a href="<?= basePath('/feed?tag=') . urlencode($tag) ?>">
-        <button class="px-4 py-1 bg-transparent rounded-full hover:bg-blue-600 cursor-pointer transition-colors duration-300<?= $isActive ? ' bg-blue-600 text-white' : '' ?>">
+        <button class="px-4 py-1 rounded-full transition-colors duration-300 <?= $isActive ? 'bg-blue-600 text-white' : 'bg-transparent hover:bg-gray-200 text-black' ?>">
           <?= htmlspecialchars($tag) ?>
         </button>
       </a>
@@ -40,12 +40,12 @@
         <button class="px-4 py-1 bg-transparent rounded-full hover:bg-blue-600 transition-colors duration-300">
           More
         </button>
-        <div class="absolute z-10 invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-gray-200 border rounded shadow-md p-2">
+        <div class="absolute z-10 invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-white border rounded shadow-md p-2">
           <?php foreach (array_slice($tags, $limit) as $tag):
             $isActive = isset($selectedTag) && $selectedTag === $tag;
             ?>
             <a href="<?= basePath('/feed?tag=') . urlencode($tag) ?>">
-              <div class="px-2 py-1 hover:bg-blue-600 cursor-pointer transition-colors duration-300<?= $isActive ? ' bg-blue-600 text-white' : '' ?>">
+              <div class="px-2 py-1 rounded-full transition-colors duration-300 <?= $isActive ? 'bg-blue-600 text-white' : 'hover:bg-gray-200 text-black' ?>">
                 <?= htmlspecialchars($tag) ?>
               </div>
             </a>
