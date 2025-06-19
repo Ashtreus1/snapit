@@ -33,20 +33,23 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 70%;
   max-width: 1000px;
   max-height: 100%;
 }
 
 .main-image {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 60vh;
   width: auto;
   height: auto;
   object-fit: contain;
   border-radius: 30px;
   box-shadow: 11px 10px 19px rgba(0, 0, 0, 0.25);
   background: white;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .post-content {
@@ -130,7 +133,7 @@ body {
 }
 
 .comment-input-box input {
-  padding-right: 3rem; /* space for the send button */
+  padding-right: 3repinm; /* space for the send button */
 }
 .send-btn {
   position: absolute;

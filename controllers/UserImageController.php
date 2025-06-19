@@ -97,4 +97,28 @@ class UserImageController
 	    return $this->userImageModel->searchImagesByTitle($title);
 	}
 
+	// Delete a post (image) by its ID and only if it belongs to the current user
+	public function handleDeletePost() {
+		requireAuth();
+		$userId = $_SESSION['user_id'];
+		$imageId = $_POST['image_id'] ?? null;
+		if (!$imageId) {
+			$_SESSION['error'] = 'No image specified.';
+			header('Location: ' . basePath('/profile'));
+			exit;
+		}
+		// Only allow deleting your own image
+		$image = $this->userImageModel->fetchImageById($imageId);
+		if (!$image || $image['user_id'] != $userId) {
+			$_SESSION['error'] = 'You are not allowed to delete this post.';
+			header('Location: ' . basePath('/profile'));
+			exit;
+		}
+		// Delete the image (and any pins/comments if needed)
+		$this->userImageModel->deleteImageById($imageId);
+		$_SESSION['success'] = 'Post deleted successfully.';
+		header('Location: ' . basePath('/profile'));
+		exit;
+	}
+
 }

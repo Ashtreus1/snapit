@@ -87,8 +87,17 @@ class UserController {
         }
 
         $this->userModel->updateProfile($userId, $username, $avatarPath);
-        $_SESSION['success'] = "Profile updated successfully.";
 
+        // Refresh session data with latest user info
+        $updatedUser = $this->userModel->findById($userId);
+        $_SESSION['username'] = $updatedUser['username'];
+        if (!empty($updatedUser['avatar_path'])) {
+            $_SESSION['avatar'] = $updatedUser['avatar_path'];
+        } else {
+            unset($_SESSION['avatar']);
+        }
+
+        $_SESSION['success'] = "Profile updated successfully.";
         header("Location: " . basePath('/profile'));
     }
 

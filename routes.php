@@ -108,7 +108,9 @@ $router->get('/creation-post', function () use ($render, $tagController) {
         'tags' => $tags
     ]);
 });
+// $router->post('/creation-post', fn () => (new UserImageController())->handlePost());
 $router->post('/creation-post', fn () => (new UserImageController())->handlePost());
+
 
 // Profile
 $router->get('/profile', function () use ($render, $userController, $userImageController) {
@@ -118,6 +120,7 @@ $router->get('/profile', function () use ($render, $userController, $userImageCo
     $images = $userImageController->handleFetchImagesByUserId($_SESSION['user_id']);
 
     $pinnedImages = $userImageController->handleFetchPinnedImages($_SESSION['user_id']);
+    
 
     $render->setLayout('layouts/protected');
     $render->view('protected/profile', [
@@ -142,6 +145,8 @@ $router->get('/comments', function () use ($render, $userController, $userImageC
         exit;
     }
 
+    $currentUser = $userController->getCurrentUser();
+
     $comments = $commentController->handleFetchCommentByImageId($imageId);
     $imageDetails = $userImageController->handleFetchImageById($imageId);
     $userData = $userController->getCurrentUser();
@@ -152,7 +157,11 @@ $router->get('/comments', function () use ($render, $userController, $userImageC
         'imagePath' => $imageDetails['image_path'],
         'imageDetails' => $imageDetails,
         'comments' => $comments,
-        'userData' => $userData
+        'userData' => $userData,
+        'user' => $currentUser,
     ]);
 });
 $router->post('/comments', fn () => (new CommentController())->handleCreateComment());
+
+// Delete post (image)
+$router->post('/delete-post', fn () => (new UserImageController())->handleDeletePost());

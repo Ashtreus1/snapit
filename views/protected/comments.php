@@ -15,6 +15,20 @@
           <?= htmlspecialchars($imageDetails['description'] ?? '#Photography') ?>
         </div>
 
+        <div class="likes" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 6px;">
+          <div class="like-icon">
+            <span class="material-symbols-outlined">favorite</span>
+          </div>
+          <span style="font-size: 1.1em; font-weight: 500; padding-bottom: 5px;">
+            <?php
+              // Count how many users pinned this image (favorites)
+              $stmt = $GLOBALS['db']->connection->prepare('SELECT COUNT(*) FROM pinned_images WHERE image_id = ?');
+              $stmt->execute([$imageDetails['id']]);
+              echo $stmt->fetchColumn();
+            ?>
+          </span>
+        </div>
+
         <div class="comment-scroll">
           <?php if (!empty($comments)): ?>
             <?php foreach ($comments as $comment): ?>

@@ -1,8 +1,8 @@
 <main class="profile-content">
   <div class="profile-header-wrapper">
     <div class="profile-picture-wrapper">
-      <?php if (!empty($user['avatar'])): ?>
-        <img src="<?= htmlspecialchars($user['avatar']) ?>" alt="Avatar" class="profile-picture" />
+      <?php if (!empty($user['avatar_path'])): ?>
+        <img src="<?= htmlspecialchars($user['avatar_path']) ?>" alt="Avatar" class="profile-picture" />
       <?php else: ?>
         <img src="https://ui-avatars.com/api/?name=<?= urlencode($user['username'] ?? 'U') ?>&background=random" alt="Default Avatar" class="profile-picture" />
       <?php endif; ?>
@@ -34,23 +34,38 @@
   <!-- POSTS SECTION -->
   <section id="posts" class="tab-section">
     <?php if (!empty($images)): ?>
-      <?php foreach ($images as $image): ?>
-        <div class="post">
-          <img src="<?= htmlspecialchars($image['image_path']) ?>" alt="Post Image">
-          <div class="caption-details">
-            <div class="caption-text">
-              <div class="caption"><?= htmlspecialchars($image['title']) ?></div>
-              <div class="tags"><?= htmlspecialchars($image['description']) ?></div>
-            </div>
-            <div class="likes">
-              <div class="like-icon">
-                <span class="material-symbols-outlined">favorite</span>
+      <div class="posts grid gap-6 p-4"> <!-- Added grid, gap, and padding -->
+        <?php foreach ($images as $image): ?>
+          <div class="post bg-white rounded-lg shadow p-4 mb-4"> <!-- Added padding, margin, bg, rounded, shadow -->
+            <img src="<?= htmlspecialchars($image['image_path']) ?>" alt="Post Image" class="mb-3 rounded" style="max-height:300px; object-fit:cover; width:100%;"> <!-- Added margin and rounded -->
+            <div class="caption-details">
+              <div class="caption-text">
+                <div class="caption"><?= htmlspecialchars($image['title']) ?></div>
+                <div class="tags"><?= htmlspecialchars($image['description']) ?></div>
               </div>
-              <span>0</span>
+              <div class="likes" style="display: flex; align-items: center; gap: 8px;">
+                <div class="like-icon">
+                  <span class="material-symbols-outlined">favorite</span>
+                </div>
+                <span>
+                  <?php
+                    // Count how many users pinned this image (favorites)
+                    $stmt = $GLOBALS['db']->connection->prepare('SELECT COUNT(*) FROM pinned_images WHERE image_id = ?');
+                    $stmt->execute([$image['id']]);
+                    echo $stmt->fetchColumn();
+                  ?>
+                </span>
+                <form method="POST" action="<?= basePath('/delete-post') ?>" onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.');" style="display:inline; margin-left:8px;">
+                  <input type="hidden" name="image_id" value="<?= $image['id'] ?>">
+                  <button type="submit" class="delete-btn" style="background:none; border:none; color:#e53e3e; cursor:pointer; font-size:1.2em;">
+                    <span class="material-symbols-outlined">delete</span>
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+      </div>
     <?php else: ?>
       <p class="text-center text-gray-400">No posts yet.</p>
     <?php endif; ?>
@@ -59,15 +74,14 @@
   <!-- PINS SECTION -->
   <section id="pins" class="tab-section hidden mt-12">
     <?php if (!empty($pinnedImages)): ?>
-      <div class="posts">
+      <div class="posts grid gap-6 p-4"> <!-- Added grid, gap, and padding -->
         <?php foreach ($pinnedImages as $image): ?>
-          <div class="post relative group overflow-hidden rounded-lg mb-6">
-            <a href="<?= basePath('/comments?image_id=' . $image['id']) ?>">
+          <div class="relative group overflow-hidden rounded-lg mb-6 p-4"> <!-- Added bg, shadow, padding -->
+            <a href="<?= basePath('/comments?image_id=' . $image['id']) ?>"> 
               <img 
-                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                class="w-full h-90 object-cover transition-transform duration-300 group-hover:scale-105 rounded mb-3"
                 src="<?= htmlspecialchars($image['image_path']) ?>"
-                alt="<?= htmlspecialchars($image['title']) ?>"
-              >
+                alt="<?= htmlspecialchars($image['title']) ?>">
               <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             <form 

@@ -109,4 +109,17 @@ class UserImageModel
 	    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	// Delete an image by its ID
+	public function deleteImageById($imageId) {
+	    // Delete from pinned_images first (to avoid FK constraint)
+	    $stmt = $this->pdo->prepare('DELETE FROM pinned_images WHERE image_id = ?');
+	    $stmt->execute([$imageId]);
+	    // Delete from comments (if you want to remove comments as well)
+	    $stmt = $this->pdo->prepare('DELETE FROM comments WHERE image_id = ?');
+	    $stmt->execute([$imageId]);
+	    // Delete the image itself
+	    $stmt = $this->pdo->prepare('DELETE FROM users_images WHERE id = ?');
+	    return $stmt->execute([$imageId]);
+	}
+
 }

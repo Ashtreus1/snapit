@@ -9,7 +9,7 @@
 	
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
 	<link rel="stylesheet" href="assets/css/profile.css">
-	<!-- <link rel="stylesheet" href="assets/css/view-post.css"> -->
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 	
 	<link rel="icon" type="image/x-icon" href="assets/images/header-logo.png">
@@ -27,9 +27,9 @@
 	      <p class="text-sm font-medium">
 	        <?= htmlspecialchars($user['username'] ?? '') ?>
 	      </p>
-	      <?php if (!empty($user['avatar'])): ?>
+	      <?php if (!empty($user['avatar_path'])): ?>
 	        <img 
-	          src="<?= htmlspecialchars($user['avatar']) ?>" 
+	          src="<?= htmlspecialchars($user['avatar_path']) ?>" 
 	          alt="Avatar" 
 	          class="h-10 w-10 rounded-full object-cover"
 	        />
