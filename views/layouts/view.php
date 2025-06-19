@@ -8,7 +8,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 	
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"/>
-	<link rel="stylesheet" href="assets/css/view-post.css">
+	<link rel="stylesheet" href="assets/css/view_post.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 	
 	<link rel="icon" type="image/x-icon" href="assets/images/header-logo.png">

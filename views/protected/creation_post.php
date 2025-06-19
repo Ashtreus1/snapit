@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<?= basePath('/assets/css/creation_post.css') ?>">
+<link rel="stylesheet" href="<?= basePath('/assets/css/create_post.css') ?>">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@1" />
 <?php if (!empty($_SESSION['error'])): ?>
